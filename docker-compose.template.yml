@@ -1,4 +1,13 @@
-      - ./app/src/config.js:/src/app/src/config.js:ro
+version: '3'
+
+services:
+    mirotalksfu:
+        image: mirotalk/sfu:latest
+        container_name: mirotalksfu
+        hostname: mirotalksfu
+        restart: unless-stopped
+        volumes:    
+            - ./app/src/config.js:/src/app/src/config.js:ro
             # These volumes are not mandatory, comment if you want to use it
             - ./app/:/src/app/:ro
             - ./public/:/src/public/:ro
@@ -7,10 +16,9 @@
             - '40000-40100:40000-40100/tcp'
             - '40000-40100:40000-40100/udp'
         networks:
-        proxy_swag_network:
-          aliases:
-            - ofelia
-
+            proxy_swag_network:
+                aliases:
+                    - mirotalksfu
 networks: 
     default: 
         external: 
