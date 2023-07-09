@@ -6,7 +6,7 @@ services:
         container_name: mirotalksfu
         hostname: mirotalksfu
         restart: unless-stopped
-        volumes:    
+        volumes:
             - ./app/src/config.js:/src/app/src/config.js:ro
             # These volumes are not mandatory, comment if you want to use it
             - ./app/:/src/app/:ro
@@ -16,10 +16,10 @@ services:
             - '40000-40100:40000-40100/tcp'
             - '40000-40100:40000-40100/udp'
         networks:
-            proxy_swag_network:
+            sfu_network:
                 aliases:
-                    - mirotalksfu
-networks: 
-    default: 
-        external: 
-            name:  proxy_swag_network
+                    - sfu
+networks:
+    sfu_network:
+        name: proxy_swag_network
+        external: true
